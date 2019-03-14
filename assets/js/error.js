@@ -1,0 +1,12 @@
+var inventoryImg= 'Please add at least one inventory image .';
+var inventoryImgCount= 'Please attached images less than or equal to 12.';
+var errorcolor = "css('color','#a94442')";
+var erorFade = "fadeOut(5000)";
+var addInventory = "Inventory added successfully.";
+var miemNum = "IMEI/MEID number already exist.";
+var editInventory="Inventory detail updated successfully.";
+var editInventory1="Inventory detail already updated.";
+var listedEbay = "Product listed on ebay successfully.";
+var notListedEbay = "Product not listed on ebay successfully.";
+var trackingNum = "Tracking number added successfully.";
+var trackingNum1 = "Tracking number not added. Please try again.";

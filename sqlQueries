@@ -1,0 +1,139 @@
+ALTER TABLE `amaEb_amazonOrder` ADD `orderAction` VARCHAR(25) NULL AFTER `orderStatus`;
+ALTER TABLE `amaEb_amazonOrder` ADD `IMEINumber` VARCHAR(200) NULL AFTER `trackingNumber`;
+ALTER TABLE `amaEb_ebayInventory` ADD `listingStatus` VARCHAR(50) NULL AFTER `ebayItemRef`
+ALTER TABLE `amaEb_orderDetail` ADD `IMEINumber` VARCHAR(200) NULL AFTER `trackingNumber`
+ALTER TABLE `amaEb_ebayInventory` ADD `modifiedDate` DATE NULL AFTER `addedOn`;
+ALTER TABLE `amaEb_orderDetail` ADD `addedOn` DATE NULL AFTER `IMEINumber`, ADD `modifiedDate` DATE NULL AFTER `addedOn`;
+ExternalTransactionType
+9J-CQGE-H55Y
+https://sellercentral.amazon.com/forums/message.jspa?messageID=3380988
+// query to deleteRecords
+DELETE FROM amaEb_amazonOrder
+WHERE orderRef NOT IN (SELECT orderId  FROM amaEb_amazoneOrderItem)
+
+delete `amaEb_amazonOrder` from `amaEb_amazonOrder` inner join ( select max(id) as lastId, orderRef from `amaEb_amazonOrder` group by orderRef having count(*) > 1) duplic on duplic.orderRef = `amaEb_amazonOrder`.orderRef where `amaEb_amazonOrder`.id < duplic.lastId
+
+SELECT
+    orderRef, COUNT(*)
+FROM
+    amaEb_amazonOrder
+GROUP BY
+    orderRef
+HAVING
+    COUNT(*) > 1
+<?xml version="1.0" encoding="utf-8" ?>
+<AmazonEnvelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="amzn-envelope.xsd">
+    <Header>
+        <DocumentVersion>1.01</DocumentVersion>
+        <MerchantIdentifier></MerchantIdentifier>
+    </Header>
+    <MessageType>Product</MessageType>
+    <PurgeAndReplace>false</PurgeAndReplace>
+    <Message>
+        <MessageID>1</MessageID>
+        <OperationType>PartialUpdate</OperationType>
+        <Product>
+            <SKU>AK-2225-FjK3</SKU>
+            <DescriptionData>
+                <Title>demohphone</Title>
+            </DescriptionData>
+        </Product>
+    </Message>
+</AmazonEnvelope>
+
+/*$requestXmlBodyAddItem = '<?xml version="1.0" encoding="utf-8" ?>';
+$requestXmlBodyAddItem .= '<GetMyeBaySellingRequest xmlns="urn:ebay:apis:eBLBaseComponents">';
+$requestXmlBodyAddItem .= '<ActiveList>
+                              <Sort>TimeLeft</Sort>
+                              <Pagination>
+                                <EntriesPerPage>3</EntriesPerPage>
+                                <PageNumber>1</PageNumber>
+                              </Pagination>
+                            </ActiveList>';
+$requestXmlBodyAddItem .= "<RequesterCredentials><eBayAuthToken>$userToken</eBayAuthToken></RequesterCredentials>";
+$requestXmlBodyAddItem .= '</GetMyeBaySellingRequest>';*/
+
+https://sellercentral.amazon.com/forums/thread.jspa?messageID=3060943
+https://sellercentral.amazon.in/forums/thread.jspa?messageID=1474868
+/*
+<?xml version=”1.0″?>
+<AmazonEnvelope xmlns:xsi=”http://www.w3.org/2001/XMLSchema-instance” xsi:noNamespaceSchemaLocation=”amzn-envelope.xsd”>
+<Header> <DocumentVersion>1.01</DocumentVersion><MerchantIdentifier>XXXXXXXXXXXXX</MerchantIdentifier> </Header>
+<MessageType>Product</MessageType><PurgeAndReplace>false</PurgeAndReplace>
+<Message>
+<MessageID>1</MessageID>
+<OperationType>Update</OperationType>
+<Product>
+<SKU>220</SKU>
+<StandardProductID>
+<Type>UPC</Type>
+<Value>680242554716</Value>
+</StandardProductID>
+<ProductTaxCode>A_GEN_TAX</ProductTaxCode>
+<LaunchDate>2014-04-22T04:00:00</LaunchDate>
+<Condition>
+<ConditionType>New</ConditionType>
+</Condition>
+<DescriptionData>
+<Title>Home Decor Company Hand woven Chobi Sumak 5-Feet 6-Inch by 8-Feet 6-Inch Wool Sumak, Aqua 2, Beige, Copper, Cream</Title>
+<Brand>Home Decor Company</Brand>
+<Description>These luxurious flat-woven rugs are handmade by Afghan master weavers. They are woven using.</Description>
+<BulletPoint>High-density polypropylene pile provides one of the plushest feelings available in a rug</BulletPoint>
+<BulletPoint>Intricate yet understated design with a scrolling vine pattern provides depth and textural appeal</BulletPoint>
+<BulletPoint>Imported from India</BulletPoint> <BulletPoint> Flat-weave and constructed from 100%</BulletPoint>
+<BulletPoint>5-Feet 6-Inch by 8-Feet 6-Inch (167cm x 259cm)</BulletPoint>
+<MSRP currency=”CAD”>941.90</MSRP>
+<Manufacturer>Home Decor Company</Manufacturer>
+<MfrPartNumber>220</MfrPartNumber>
+<SearchTerms>arpet;bedrooms;carpet;carpets;carpt;cheap;crpet</SearchTerms>
+<SearchTerms>decor;expensive;flat;flatweave;home;kids;kitchen</SearchTerms>
+<SearchTerms>less;living;luxury;new;pakistan;pakistani;panel</SearchTerms>
+<SearchTerms>quality;rectangle;rectangular;rgs;room;rug;rugs</SearchTerms>
+<SearchTerms>sale;transitional;vintage;weave</SearchTerms>
+<UsedFor>bedroom</UsedFor>
+<UsedFor>living room</UsedFor>
+<UsedFor>dining room</UsedFor>
+<UsedFor>floor</UsedFor>
+<UsedFor>decor</UsedFor>
+<ItemType>handmade-rugs</ItemType>
+<OtherItemAttributes>Rectangular</OtherItemAttributes>
+<OtherItemAttributes>Panel</OtherItemAttributes>
+<OtherItemAttributes>Transitional</OtherItemAttributes>
+<OtherItemAttributes>Artisan</OtherItemAttributes>
+<OtherItemAttributes>Urban</OtherItemAttributes>
+<TargetAudience>Adults</TargetAudience>
+<TargetAudience>Children</TargetAudience>
+<TargetAudience>Men</TargetAudience>
+<TargetAudience>Women</TargetAudience>
+<RecommendedBrowseNode>6647000011</RecommendedBrowseNode>
+<RecommendedBrowseNode>6647007011</RecommendedBrowseNode>
+</DescriptionData>
+<ProductData>
+<Home>
+<ProductType>
+<FurnitureAndDecor>
+<ColorMap>Green</ColorMap>
+<Material>Wool & Wool Blend</Material>
+<Shape>Rectangular</Shape>
+<VariationData>
+<Size>6′ x 9′</Size>
+<Color>Green</Color>
+<StyleName>Contemporary</StyleName>
+</VariationData>
+</FurnitureAndDecor>
+</ProductType>
+<CountryAsLabeled>PK</CountryAsLabeled>
+<CountryOfOrigin>PK</CountryOfOrigin>
+<CountryProducedIn>Pakistan</CountryProducedIn>
+<ImportDesignation>Imported</ImportDesignation>
+<FabricType>100% Wool</FabricType>
+<PatternName>Geometric</PatternName>
+<DisplayLength unitOfMeasure=”CM”>259</DisplayLength>
+<DisplayWidth unitOfMeasure=”CM”>167</DisplayWidth>
+<DisplayWeight unitOfMeasure=”LB”>27.9</DisplayWeight>
+<ManufacturerWarrantyDescription>30-day Money Back Guarantee </ManufacturerWarrantyDescription>
+</Home>
+</ProductData>
+</Product>
+</Message>
+</AmazonEnvelope>*/
